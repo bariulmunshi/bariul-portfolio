@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* ---- Type ---- */
+    --font-display: "Space Grotesk", "Hind Siliguri", sans-serif;
+    --font-body: "Inter", "Hind Siliguri", sans-serif;
+    --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+    /* ---- Signature palette: "Lab Notebook" ----
+       Warm paper base in light mode, deep graphite-ink in dark mode.
+       Single accent: oxidized copper/amber (circuit + chemistry feel)
+       Secondary accent: cold cyan (signal / data) used sparingly */
+    --color-ink-950: #0b0d10;
+    --color-ink-900: #12151a;
+    --color-ink-800: #1a1f26;
+    --color-ink-700: #242b34;
+    --color-ink-600: #333c48;
+    --color-paper-50: #faf8f3;
+    --color-paper-100: #f2efe6;
+
+    --color-signal-500: #ff8a3d;
+    --color-signal-400: #ffa35f;
+    --color-signal-600: #e06f24;
+
+    --color-data-400: #5eead4;
+    --color-data-500: #2dd4bf;
+
+    --shadow-glow-signal: 0 0 40px -10px rgba(255, 138, 61, 0.45);
+    --shadow-glow-data: 0 0 40px -10px rgba(45, 212, 191, 0.35);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    background-color: var(--color-paper-50);
+}
+
+.dark body {
+    background-color: var(--color-ink-950);
+}
+
+/* Utility: monospace tag styling used for labels/eyebrows site-wide */
+.font-mono-tag {
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+}
+
+/* Respect reduced motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Custom scrollbar - subtle, fits the lab/terminal feel */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-700);
+}
+
+/* ---- Prose styling: shared by the editor and rendered blog posts ---- */
+.prose-editor,
+.prose-content {
+    font-family: var(--font-body);
+    line-height: 1.75;
+    color: var(--color-ink-800);
+}
+.dark .prose-editor,
+.dark .prose-content {
+    color: var(--color-paper-100);
+}
+
+.prose-editor h2,
+.prose-content h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-ink-950);
+}
+.dark .prose-editor h2,
+.dark .prose-content h2 {
+    color: var(--color-paper-50);
+}
+
+.prose-editor h3,
+.prose-content h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-ink-950);
+}
+.dark .prose-editor h3,
+.dark .prose-content h3 {
+    color: var(--color-paper-50);
+}
+
+.prose-editor p,
+.prose-content p {
+    margin-bottom: 1rem;
+}
+
+.prose-editor ul,
+.prose-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+.prose-editor ol,
+.prose-content ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+.prose-editor li,
+.prose-content li {
+    margin-bottom: 0.35rem;
+}
+
+.prose-editor blockquote,
+.prose-content blockquote {
+    border-left: 3px solid var(--color-signal-500);
+    padding-left: 1rem;
+    margin: 1.25rem 0;
+    font-style: italic;
+    color: var(--color-ink-600);
+}
+.dark .prose-editor blockquote,
+.dark .prose-content blockquote {
+    color: var(--color-paper-100);
+    opacity: 0.85;
+}
+
+.prose-editor pre,
+.prose-content pre {
+    background: var(--color-ink-950);
+    color: var(--color-paper-50);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin: 1.25rem 0;
+}
+.prose-editor code,
+.prose-content code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: rgb(11 13 16 / 0.06);
+}
+.dark .prose-editor code,
+.dark .prose-content code {
+    background: rgb(250 248 243 / 0.1);
+}
+
+.prose-editor img,
+.prose-content img {
+    border-radius: 0.75rem;
+    margin: 1rem 0;
+    max-width: 100%;
+}
+
+.prose-editor a,
+.prose-content a {
+    color: var(--color-signal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.dark .prose-editor a,
+.dark .prose-content a {
+    color: var(--color-signal-400);
+}
+
+/* TipTap placeholder text */
+.prose-editor p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: var(--color-ink-600);
+    opacity: 0.45;
+}
+.dark .prose-editor p.is-editor-empty:first-child::before {
+    color: var(--color-paper-100);
+}

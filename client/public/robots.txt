@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mdbariulmunshi.vercel.app/sitemap.xml
