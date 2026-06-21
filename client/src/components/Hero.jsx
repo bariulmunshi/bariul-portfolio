@@ -259,7 +259,7 @@ const Hero = () => {
                                 text-ink-700 dark:text-paper-100/80
                             "
                         >
-                            Savar, Dhaka · BANGLADESH
+                            Dhaka · BANGLADESH
                         </div>
                     </div>
                 </div>
