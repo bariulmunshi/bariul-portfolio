@@ -259,7 +259,7 @@ const Hero = () => {
                                 text-ink-700 dark:text-paper-100/80
                             "
                         >
-                            Dhaka · BANGLADESH
+                            Mirpur-1, Dhaka · BANGLADESH
                         </div>
                     </div>
                 </div>
